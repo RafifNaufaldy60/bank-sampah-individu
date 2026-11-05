@@ -15,7 +15,7 @@ const getWasteTypeById = async (req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query('SELECT * FROM waste_types WHERE id = $1', [id]);
-        
+
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "Data tidak ditemukan" });
         }
@@ -48,7 +48,7 @@ const updateWasteType = async (req, res) => {
             'UPDATE waste_types SET name = $1, price_per_kg = $2, guidance = $3 WHERE id = $4 RETURNING *',
             [name, price_per_kg, guidance, id]
         );
-        
+
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "Data tidak ditemukan" });
         }
@@ -63,7 +63,7 @@ const deleteWasteType = async (req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query('DELETE FROM waste_types WHERE id = $1 RETURNING *', [id]);
-        
+
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "Data tidak ditemukan" });
         }
